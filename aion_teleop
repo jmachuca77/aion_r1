@@ -1,0 +1,50 @@
+Jetson IP: 192.168.1.103
+User: nvidia
+Pass: nvidia
+
+ssh -X nvidia@126.168.1.103
+
+Setup Bluetooth
+
+gstest-gtk - Map:
+invert angular: 0
+enable: 8
+Turbo: 14
+
+Clone Roboclaw_node:
+cd <workspace>/src
+git clone https://github.com/doisyg/roboclaw_ros.git (forked version)
+cd <workspace>
+catkin_make
+
+
+Modify roboclaw_node launch file: (roboclaw_node/launch/roboclaw.launch)
+dev: /dev/ttyACM0
+baud: 115200
+acc_lim: 2.0
+base_width: .431
+max_abs_angular_speed: 2
+max_abs_linear_speed: 2
+ticks_per_meter: 2263.6
+
+
+Modify teleop_twist_joy config file: (/opt/ros/kinetic/shared/teleop_twist_joy/config/ps3.config.yaml)
+axis_linear: 1
+scale_linear: 1
+scale_linear_turbo: 2
+
+axis_angular: 0
+scale_angular: 2
+
+enable_button: 8  # L2 shoulder button
+enable_turbo_button: 14  # L1 shoulder button
+
+Launch roboclaw_node:
+cd <workspace>
+source devel/setup.bash
+roslaunch roboclaw_node roboclaw.launch
+
+Launch teleop_twist_joy: (Included with Kinetic - https://github.com/ros-teleop/teleop_twist_joy)
+cd <workspace>
+source devel/setup.bash
+roslaunch teleop_twist_joy teleop.launch
