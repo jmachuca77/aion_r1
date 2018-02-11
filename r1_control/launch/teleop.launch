@@ -13,13 +13,13 @@
     </node>
 
     <node pkg="roboclaw_node" type="roboclaw_pyscript.py" name="roboclaw_node">
-      
+<!-- Not sure if the following is correct? Attempting to change value of roboclaw_node clone-->
       <param name="dev" value="$(/dev/ttyACM0)"/>
       <param name="baud" value="$(115200)"/>
       <param name="address" value="$(128)"/>
       <param name="max_abs_linear_speed" value="$(2)"/>
       <param name="max_abs_angular_speed" value="$(2)"/>
-<!-- Wheels max acceleration m/s^2
+<!-- Wheels max acceleration m/s^2 -->
       <param name="acc_lim" value="$(2.0)"/>
 <!-- 1120 ticks/rev ; 6.2 inch diam ; 0.494792 meters circumference -->
       <param name="ticks_per_meter" value="$(2263.6)"/>
